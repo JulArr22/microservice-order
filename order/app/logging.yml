@@ -1,0 +1,36 @@
+version: 1
+disable_existing_loggers: true
+
+aliases:
+  - &formatColorConsole
+    '%(asctime)s %(name)+32s:%(lineno)-8d %(funcName)-32s %(levelname)+8s: %(message)s'
+
+formatters:
+  brief:
+    format: '%(message)s'
+  standard:
+    format: '%(asctime)s %(name)+32s:%(lineno)-8d %(levelname)+8s: %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+  colored:
+    (): coloredlogs.ColoredFormatter
+    format: *formatColorConsole
+    datefmt: '%Y-%m-%d %H:%M:%S'
+
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: colored
+    stream: ext://sys.stdout
+
+root:
+  level: INFO
+  handlers: [console]
+  propagate: yes
+
+loggers:
+  app:
+    level: DEBUG
+    handlers: [console]
+    propagate: no

@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  order1:
+    hostname: order1
+    build: ./order
+    volumes:
+      - './order/app:/code/app'
+    ports:
+      - '18014:${UVICORN_PORT}'
+    environment:
+      SERVICE_NAME: order
+      SERVICE_ID: order1
+      CONSUL_HOST: ${CONSUL_HOST}
+      UVICORN_PORT: ${UVICORN_PORT}
+    restart: unless-stopped
