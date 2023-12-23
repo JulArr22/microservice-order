@@ -1,11 +1,12 @@
 import aio_pika
 import json
 from sql.database import SessionLocal # pylint: disable=import-outside-toplevel
+from os import environ
 
 async def subscribe_channel():
     # Define your RabbitMQ server connection parameters directly as keyword arguments
     connection = await aio_pika.connect_robust(
-        host='rabbitmq',
+        host=environ.get("RABBITMQ_IP"),
         port=5672,
         virtualhost='/',
         login='user',

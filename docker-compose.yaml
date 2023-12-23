@@ -13,4 +13,6 @@ services:
       SERVICE_ID: order1
       CONSUL_HOST: ${CONSUL_HOST}
       UVICORN_PORT: ${UVICORN_PORT}
+      RABBITMQ_IP: ${RABBITMQ_IP}
+      ORDER_PORT: ${ORDER_PORT}
     restart: unless-stopped
